@@ -7,6 +7,11 @@ const productSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
+    id: {
+        type: String,
+        required: true,
+        trim: true
+    },
     img: {
         type: String,
         trim: true
