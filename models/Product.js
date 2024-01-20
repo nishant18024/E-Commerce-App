@@ -30,5 +30,5 @@ const productSchema = new mongoose.Schema({
 // product model using productSchema
 let Product = mongoose.model('Product', productSchema)
 
-// exporting product
+// exporting product to use it in any other file
 module.exports = Product;
