@@ -18,5 +18,33 @@ router.post('/products', async (req, res) => {
     res.redirect('/products')
 })
 
-// it will automatically save into database
+// show particular product
+router.get('/products/:id', async (req, res) => {
+    let { id } = req.params
+    let foundProduct = await Product.findById(id)
+    res.render('show', { foundProduct })
+})
+
+// Editing a product details
+router.get('/products/:id/edit' , async(req,res)=>{
+    let {id} = req.params;
+    let foundProduct = await Product.findById(id);
+    res.render('edit' , {foundProduct})
+})
+
+//Actually changing the product details
+router.patch('/products/:id' , async(req,res)=>{
+    let {id} = req.params;
+    let {name , img , price , desc} = req.body;
+    await Product.findByIdAndUpdate(id , {name , img , price , desc} );
+    res.redirect('/products')
+})
+
+// deleting product
+router.delete('/products/:id', async (req, res) => {
+    let { id } = req.params
+    await Product.findByIdAndDelete(id)
+    res.redirect('/products')
+
+})
 module.exports = router;
