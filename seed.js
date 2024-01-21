@@ -19,7 +19,7 @@ const products = [
         name: 'Apple Pencil',
         img: 'https://images.unsplash.com/photo-1594200664133-0ee987e1babf?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YXBwbGUlMjBwZW5jaWx8ZW58MHx8MHx8fDA%3D',
         price: 10000,
-        desc: 'I can write the future'
+        desc: 'It can write the future'
     }
 ]
 

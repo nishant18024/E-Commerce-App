@@ -25,6 +25,11 @@ app.set('views', path.join(__dirname, 'views'))
 // static file path
 app.use(express.static(path.join(__dirname, 'public')))
 
+// storing product data in database
+// need to comment it after running it once 
+// because if not it will seed again and again due to nodemon server restart
+
+// seedDB();
 
 app.listen(PORT, () => {
     console.log(`Server is running at Port:${PORT}`)
