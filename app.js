@@ -3,6 +3,7 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const seedDB = require('./seed')
+const productRoutes = require('./routes/product')
 
 
 const app = express();
@@ -30,6 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')))
 // because if not it will seed again and again due to nodemon server restart
 
 // seedDB();
+
+app.use(productRoutes)
+
+// 
+app.use(express.urlencoded({extended: true}))
 
 app.listen(PORT, () => {
     console.log(`Server is running at Port:${PORT}`)
