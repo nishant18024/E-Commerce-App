@@ -32,10 +32,11 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 // seedDB();
 
-app.use(productRoutes)
 
 // 
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
+
+app.use(productRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running at Port:${PORT}`)
