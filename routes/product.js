@@ -32,7 +32,7 @@ router.get('/products/:id/edit' , async(req,res)=>{
     res.render('edit' , {foundProduct})
 })
 
-//Actually changing the product details
+//Actually changing the product details in database
 router.patch('/products/:id' , async(req,res)=>{
     let {id} = req.params;
     let {name , img , price , desc} = req.body;
