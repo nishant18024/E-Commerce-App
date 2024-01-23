@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-// schema of the product
+// schema of the review
 const reviewSchema = new mongoose.Schema(
     {
         rating: {
