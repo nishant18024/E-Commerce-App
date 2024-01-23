@@ -28,12 +28,12 @@
 
         <div class="col-6 border">
             <h1>Rating Form</h1>
-            <form action="/products/<% foundProduct._id %>/rating" method="POST">
+            <form action="/products/<%=foundProduct._id%>/rating" method="POST">
                 <label for="star">Rating</label>
                 <input type="range" name="rating" id="star" min="0" max="5">
                 <br>
-                <label for="text">Rating</label>
-                <textarea name="comment" id="text" rows="3"></textarea>
+                <label for="textt">Rating</label>
+                <textarea name="comment" id="textt" rows="3"></textarea>
                 <br>
                 <button>Add Review</button>
             </form>

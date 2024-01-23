@@ -3,8 +3,9 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const seedDB = require('./seed')
-const productRoutes = require('./routes/product')
 const methodOverride = require('method-override')
+const productRoutes = require('./routes/product')
+const reviewRoutes = require('./routes/review')
 
 
 const app = express();
@@ -39,6 +40,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 app.use(productRoutes)
+app.use(reviewRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running at Port:${PORT}`)
