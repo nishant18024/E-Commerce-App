@@ -21,22 +21,25 @@ router.post('/products', async (req, res) => {
 // show particular product
 router.get('/products/:id', async (req, res) => {
     let { id } = req.params
-    let foundProduct = await Product.findById(id)
+    // let foundProduct = await Product.findById(id)
+    // populating the revies to show in the product description page
+    let foundProduct = await Product.findById(id).populate('reviews');
+    console.log(foundProduct);
     res.render('show', { foundProduct })
 })
 
 // Editing a product details
-router.get('/products/:id/edit' , async(req,res)=>{
-    let {id} = req.params;
+router.get('/products/:id/edit', async (req, res) => {
+    let { id } = req.params;
     let foundProduct = await Product.findById(id);
-    res.render('edit' , {foundProduct})
+    res.render('edit', { foundProduct })
 })
 
 //Actually changing the product details in database
-router.patch('/products/:id' , async(req,res)=>{
-    let {id} = req.params;
-    let {name , img , price , desc} = req.body;
-    await Product.findByIdAndUpdate(id , {name , img , price , desc} );
+router.patch('/products/:id', async (req, res) => {
+    let { id } = req.params;
+    let { name, img, price, desc } = req.body;
+    await Product.findByIdAndUpdate(id, { name, img, price, desc });
     res.redirect('/products')
 })
 

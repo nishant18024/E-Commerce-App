@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/star.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -30,13 +31,41 @@
             <h1>Rating Form</h1>
             <form action="/products/<%=foundProduct._id%>/rating" method="POST">
                 <label for="star">Rating</label>
-                <input type="range" name="rating" id="star" min="0" max="5">
+
+                <!-- <input type="range" name="rating" id="star" min="0" max="5"> -->
+                <!-- Star rating -->
+                <fieldset class="starability-basic">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked
+                        aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="rating" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="rating" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="rating" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="rating" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="rating" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
                 <br>
                 <label for="textt">Rating</label>
                 <textarea name="comment" id="textt" rows="3"></textarea>
                 <br>
                 <button>Add Review</button>
             </form>
+
+            <% for(let review of foundProduct.reviews){ %>
+                <!-- <h2>Rating: <%=review.rating%> ⭐
+                </h2> -->
+                <h4>Rating: </h4>
+                <p class="starability-result" data-rating=<%=review.rating%>>
+                    <!-- This need to fixed to show rated inline with star -->
+                    <h6>Rated: <%=review.rating%> </h6>
+                </p>
+                <h5>Comment: <%=review.comment%>
+                </h5>
+                <% } %>
         </div>
     </section>
 
