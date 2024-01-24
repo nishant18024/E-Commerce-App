@@ -61,10 +61,21 @@
                 <h4>Rating: </h4>
                 <p class="starability-result" data-rating=<%=review.rating%>>
                     <!-- This need to fixed to show rated inline with star -->
-                    <h6>Rated: <%=review.rating%> </h6>
+                <h6>Rated: <%=review.rating%>
+                </h6>
                 </p>
                 <h5>Comment: <%=review.comment%>
                 </h5>
+
+                <%if(review.createdAt && review.updatedAt){%>
+
+                    <h6>Time: <%=review.createdAt.toDateString()%>
+                    </h6>
+                    <h6>Last updated at: <%=review.updatedAt.toDateString()%>
+                    </h6>
+                    <h6>Last updated at: <%=review.updatedAt.toDateString()%>
+                    </h6>
+                    <% } %>
                 <% } %>
         </div>
     </section>
