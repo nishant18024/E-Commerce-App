@@ -1,6 +1,7 @@
 const express = require('express');
 const Product = require('../models/Product');
 const Review = require('../models/Review');
+const { validateProduct } = require('../middleware');
 const router = express.Router()
 
 router.get('/products', async (req, res) => {
@@ -37,7 +38,7 @@ router.get('/products/:id/edit', async (req, res) => {
 })
 
 //Actually changing the product details in database
-router.patch('/products/:id', async (req, res) => {
+router.patch('/products/:id', validateProduct, async (req, res) => {
     let { id } = req.params;
     let { name, img, price, desc } = req.body;
     await Product.findByIdAndUpdate(id, { name, img, price, desc });
