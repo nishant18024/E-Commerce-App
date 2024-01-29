@@ -19,6 +19,9 @@ router.post('/products/:id/rating', validateReview, async (req, res) => {
         // to save the changes in the database
         await product.save();
         await review.save();
+
+        // adding flash message
+        req.flash('msg', 'Review added successfully')
         res.redirect(`/products/${id}`)
     }
     catch (e) {
