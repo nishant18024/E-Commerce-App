@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Review = require('./Review')
 
 // schema of the product
 const productSchema = new mongoose.Schema({
@@ -24,6 +25,12 @@ const productSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review'
     }]
+})
+
+productSchema.post('findOneAndDelete', async function(product){
+    if(product.reviews.length > 0){
+        await Review.deletemany({_id:{$in:product.reviews}})
+    }
 })
 
 // product model using productSchema

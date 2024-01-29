@@ -13,11 +13,11 @@
 </head>
 
 <body>
-    <div class="alert alert-success" role="alert">
-        <% if(msg && msg.length){ %>
+    <% if(msg && msg.length){ %>
+        <div class="alert alert-success" role="alert">
             <%= msg %>
-        <% } %>
-    </div>
+        </div>
+    <% } %>
 
     <section class="row">
         <h1>Displaying a particular Product</h1>

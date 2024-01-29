@@ -4,7 +4,7 @@ const path = require('path')
 const mongoose = require('mongoose')
 const seedDB = require('./seed')
 const methodOverride = require('method-override')
-const productRoutes = require('./routes/product')
+const productRoutes = require('./routes/productRoutes')
 const reviewRoutes = require('./routes/review')
 const session = require('express-session')
 const flash = require('connect-flash');
@@ -13,13 +13,6 @@ const flash = require('connect-flash');
 const app = express();
 
 const PORT = 8080;
-
-// session configuration
-let configSession = app.use(session({
-    secret: 'keyboard cat',
-    resave: true,
-    saveUninitialized: true,
-}))
 
 // database connection using mongoose
 mongoose.connect('mongodb://localhost:27017/e-commerce')
@@ -48,12 +41,26 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
+// session configuration
+let configSession = app.use(session({
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
+}))
+
 // session middleware
 app.use(session(configSession))
 
 // flash middleware
 app.use(flash());
 
+app.use((req, res, next) => {
+    res.locals.success = req.flash('Success')
+    res.locals.error = req.flash('Error')
+    next()
+})
+
+// middleware of productRoutes and reviewRoutes
 app.use(productRoutes)
 app.use(reviewRoutes)
 
