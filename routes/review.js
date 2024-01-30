@@ -1,11 +1,12 @@
 const express = require('express');
-const Product = require('./models/Product');
+const Product = require('../models/Product');
 const Review = require('../models/Review');
 const { validateReview } = require('../middleware');
 const router = express.Router()
 
 // review route
-router.post('/products/:id/rating', validateReview, async (req, res) => {
+router.post('/products/:productId/review', validateReview, async (req, res) => {
+    console.log('checkkkkkkkkkkkk');
     try {
         let { productId } = req.params;
         let { rating, comment } = req.body;
@@ -17,9 +18,10 @@ router.post('/products/:id/rating', validateReview, async (req, res) => {
         product.reviews.push(review);
 
         // to save the changes in the database
-        await product.save();
         await review.save();
+        await product.save();
 
+        console.log(review)
         // adding flash message
         req.flash('success', 'Review added successfully')
         res.redirect(`/products/${productId}`)
