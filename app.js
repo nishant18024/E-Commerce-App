@@ -4,10 +4,12 @@ const path = require('path')
 const mongoose = require('mongoose')
 const seedDB = require('./seed')
 const methodOverride = require('method-override')
-const productRoutes = require('./routes/productRoutes')
-const reviewRoutes = require('./routes/review')
 const session = require('express-session')
 const flash = require('connect-flash');
+const productRoutes = require('./routes/productRoutes')
+const reviewRoutes = require('./routes/review')
+const authRoutes = require('./routes/auth')
+const passport = require('passport')
 
 
 const app = express();
@@ -54,6 +56,19 @@ app.use(session(configSession))
 // flash middleware
 app.use(flash());
 
+// middleware for initializing passport
+app.use(passport.initialize)
+
+// to let session is being assessibe by passport
+app.use(passport.session())
+
+// use static serialize and deserialize of model for passport session support
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// use static authenticate method of model in LocalStrategy
+passport.use(new LocalStrategy(User.authenticate()));
+
 app.use((req, res, next) => {
     res.locals.success = req.flash('Success')
     res.locals.error = req.flash('Error')
@@ -63,6 +78,7 @@ app.use((req, res, next) => {
 // middleware of productRoutes and reviewRoutes
 app.use(productRoutes)
 app.use(reviewRoutes)
+app.use(authRoutes)
 
 app.listen(PORT, () => {
     console.log(`Server is running at Port:${PORT}`)
