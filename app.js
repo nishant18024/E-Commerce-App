@@ -10,6 +10,8 @@ const productRoutes = require('./routes/productRoutes')
 const reviewRoutes = require('./routes/review')
 const authRoutes = require('./routes/auth')
 const passport = require('passport')
+const User = require('./models/User')
+const LocalStrategy = require('passport-local')
 
 
 const app = express();
@@ -57,7 +59,7 @@ app.use(session(configSession))
 app.use(flash());
 
 // middleware for initializing passport
-app.use(passport.initialize)
+app.use(passport.initialize())
 
 // to let session is being assessibe by passport
 app.use(passport.session())
