@@ -1,11 +1,12 @@
 const express = require('express');
+const flash = require('connect-flash');
 const Product = require('../models/Product');
 const Review = require('../models/Review');
-const { validateReview } = require('../middleware');
+const { validateReview, isLoggedIn } = require('../middleware');
 const router = express.Router()
 
 // review route
-router.post('/products/:productId/review', validateReview, async (req, res) => {
+router.post('/products/:productId/review', isLoggedIn, validateReview, async (req, res) => {
     console.log('checkkkkkkkkkkkk');
     try {
         let { productId } = req.params;

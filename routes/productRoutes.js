@@ -1,8 +1,9 @@
 const express = require('express');
 // const Joi = require('joi');
+const flash = require('connect-flash');
 const Product = require('../models/Product');
 const router = express.Router();
-const { validateProduct } = require('../middleware');
+const { validateProduct, isLoggedIn } = require('../middleware');
 const Review = require('../models/Review');
 
 // displaying all the products
@@ -19,7 +20,7 @@ router.get('/products', async (req, res) => {
 
 
 // adding form for new product
-router.get('/products/new', (req, res) => {
+router.get('/products/new', isLoggedIn, (req, res) => {
     try {
         res.render('products/new');
     }
@@ -29,7 +30,7 @@ router.get('/products/new', (req, res) => {
 })
 
 // actually adding a product in a DataBase 
-router.post('/products', validateProduct, async (req, res) => {
+router.post('/products', isLoggedIn, validateProduct, async (req, res) => {
     try {
         let { name, img, price, desc } = req.body;
 
@@ -43,7 +44,7 @@ router.post('/products', validateProduct, async (req, res) => {
 })
 
 // for showing the details of the products
-router.get('/products/:id', async (req, res) => {
+router.get('/products/:id', isLoggedIn, async (req, res) => {
     try {
 
         let { id } = req.params;
@@ -60,7 +61,7 @@ router.get('/products/:id', async (req, res) => {
 })
 
 // for editing the product so we need form for it
-router.get('/products/:id/edit', async (req, res) => {
+router.get('/products/:id/edit', isLoggedIn, async (req, res) => {
     try {
 
         let { id } = req.params;
@@ -74,7 +75,7 @@ router.get('/products/:id/edit', async (req, res) => {
 })
 
 // changing the original edits in the database made in the editform 
-router.patch('/products/:id', validateProduct, async (req, res) => {
+router.patch('/products/:id', isLoggedIn, validateProduct, async (req, res) => {
     try {
 
         let { id } = req.params;
@@ -90,7 +91,7 @@ router.patch('/products/:id', validateProduct, async (req, res) => {
 })
 
 //product delete route
-router.delete('/products/:id', async (req, res) => {
+router.delete('/products/:id', isLoggedIn, async (req, res) => {
     try {
 
         let { id } = req.params;
