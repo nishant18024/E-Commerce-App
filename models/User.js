@@ -11,6 +11,11 @@ const userSchema = new mongoose.Schema(
             required: true,
             trim: true
         },
+        role: {
+            type: String,
+            default: 'buyer',
+            trim: true
+        },
         gender: {
             type: String,
             required: true,

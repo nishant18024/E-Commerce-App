@@ -3,6 +3,7 @@ const Product = require('../models/Product');
 const Review = require('../models/Review');
 const User = require('../models/User');
 const passport = require('passport');
+const flash = require('connect-flash')
 const router = express.Router()
 
 
@@ -11,8 +12,8 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', async (req, res) => {
-    let { username, password, email, gender } = req.body
-    let user = new User({ username, password, email, gender })
+    let { username, password, email, gender, role } = req.body
+    let user = new User({ username, password, email, gender, role })
     let newUser = await User.register(user, password)
     res.redirect('/login')
 })
