@@ -25,6 +25,10 @@ const validateReview = (req, res, next) => {
 }
 
 const isLoggedIn = (req, res, next) => {
+    console.log(req.xhr);
+    if (!req.xhr && !req.isAuthenticated()) {
+        return res.error({ msg: 'You need to login first' })
+    }
     if (!req.isAuthenticated()) {
         req.flash('Error', 'You need to login first')
         return res.redirect('/login')

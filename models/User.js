@@ -20,7 +20,13 @@ const userSchema = new mongoose.Schema(
             type: String,
             required: true,
             trim: true
-        }
+        },
+        wishlist: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Product'
+            }
+        ]
     }
 )
 

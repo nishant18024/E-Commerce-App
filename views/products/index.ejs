@@ -1,5 +1,4 @@
 
-
 <%-include('../partials/header')%>
 <%-include('../partials/navbar')%>
 <%-include('../partials/flash')%>
@@ -14,6 +13,9 @@
                 <img class="img" src="<%=item.img%>" class="card-img-top" alt="...">
                 <div class="card-body">
                   <h3 class="card-title"> <%= item.name %> </h3>
+                  <div class="btn like-btn" product-id = "<%=item._id%>">
+                    <i class="fa-regular fa-heart"></i>
+                  </div>
                   <h5 class="card-title"> Rs: <%= item.price %> </h5>
                   <p class="card-text"> <%= item.desc %> </p>
                   <p class="card-text"> <%= item.instock %> </p>
