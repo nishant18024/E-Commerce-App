@@ -1,6 +1,7 @@
 const Product = require('./models/Product');
 const { productSchema, reviewSchema } = require('./schema');
 const flash = require('connect-flash')
+const mongoose = require('mongoose')
 
 
 const validateProduct = (req, res, next) => {
@@ -46,9 +47,10 @@ const isSeller = (req, res, next) => {
 
 const isProductAuthor = async (req, res, next) => {
     let { id } = req.params
+    // let product = await Product.findById(id).populate('author')
     let product = await Product.findById(id)
-    const isEqual = product.author.equals(req.user.id)
-    if (!product.author.equals(req.user._id)) {
+    // const isEqual = product.author[0].equals(req.user.id)
+    if (!product.author[0].equals(req.user._id)) {
         req.flash('Error', `You are not the owner`)
         return res.redirect(`/products/${id}`)
     }
