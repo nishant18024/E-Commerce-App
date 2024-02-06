@@ -9,6 +9,7 @@ const flash = require('connect-flash');
 const productRoutes = require('./routes/productRoutes')
 const reviewRoutes = require('./routes/review')
 const authRoutes = require('./routes/auth')
+const cartRoutes = require('./routes/cart')
 const productApi = require('./routes/api/productapi')
 const passport = require('passport')
 const User = require('./models/User')
@@ -84,10 +85,15 @@ app.use((req, res, next) => {
     next()
 })
 
+// home route
+app.get('/', (req, res) => {
+    res.render('home')
+})
 // middleware
 app.use(productRoutes)
 app.use(reviewRoutes)
 app.use(authRoutes)
+app.use(cartRoutes)
 app.use(productApi)
 
 app.listen(PORT, () => {
