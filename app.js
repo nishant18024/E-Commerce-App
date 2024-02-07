@@ -14,14 +14,18 @@ const productApi = require('./routes/api/productapi')
 const passport = require('passport')
 const User = require('./models/User')
 const LocalStrategy = require('passport-local')
+const dotenv = require('dotenv').config()
 
 
 const app = express();
 
-const PORT = 8080;
+// const PORT = 8080;
 
 // database connection using mongoose
-mongoose.connect('mongodb://localhost:27017/e-commerce')
+let url = process.env.MONGO_URL
+// let url = 'mongodb+srv://nishantkumar18024:DlExjsd6EReDHIxS@cluster0.rohmo2s.mongodb.net/ShoppingCart?retryWrites=true&w=majority'
+// mongoose.connect('mongodb://localhost:27017/e-commerce')
+mongoose.connect(url)
     .then(() => {
         console.log('Database is connected');
     })
@@ -96,6 +100,6 @@ app.use(authRoutes)
 app.use(cartRoutes)
 app.use(productApi)
 
-app.listen(PORT, () => {
-    console.log(`Server is running at Port:${PORT}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running at Port:${process.env.PORT}`)
 })

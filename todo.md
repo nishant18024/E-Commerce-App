@@ -4,3 +4,7 @@
 4. Implementing offer/discount
 5. Adding payment gateway
 6. Improve UI
+
+    MongoDB Atlas
+ useranme - nishantkumar18024
+ Password - DlExjsd6EReDHIxS
