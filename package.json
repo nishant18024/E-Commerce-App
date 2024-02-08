@@ -1,7 +1,7 @@
 {
   "name": "e-commerce-app",
   "version": "1.0.0",
-  "description": "An e-commerce app",
+  "description": "The E-commerce App is a web application built using Node.js, Express, and MongoDB Atlas. It provides a platform for users to browse, purchase, and manage products online. With features like user authentication, product management, shopping cart functionality, and order processing, the app aims to deliver a seamless and secure e-commerce experience for both customers and administrators.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
